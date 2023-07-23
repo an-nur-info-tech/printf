@@ -44,6 +44,7 @@ int _printf(const char *format, ...)
 					{
 						va_end(args);
 						return (-1);
+						break;
 					}
 				case '%':
 					{
@@ -58,8 +59,6 @@ int _printf(const char *format, ...)
 				case  'c':
 					{
 						ch = va_arg(args, int);
-						if (ch == 0)
-							ch = '\0';
 						buffer[buff_ind++] = ch;
 						if (buff_ind == BUFF_SIZE)
 						{
