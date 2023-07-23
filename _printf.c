@@ -8,10 +8,11 @@
 int _printf(const char *format, ...)
 {
 	int i;
-	int ch, num;
+	int ch;
 	char *str;
 	va_list args;
 	va_start(args, format);
+
 	for (i = 0; format && format[i] != '\0'; i++)
 	{
 		if (format[i] != '%')
@@ -31,6 +32,7 @@ int _printf(const char *format, ...)
 				case  'c':
 					{
 						ch = va_arg(args, int);
+						/*putchar(ch);*/
 						write(1, &ch, 1);
 						break;
 					}
@@ -40,6 +42,7 @@ int _printf(const char *format, ...)
 						while (*str != '\0')
 						{
 							write(1, &str[0], 1);
+							/*putchar(*str);*/
 							str++;
 						}
 						break;
