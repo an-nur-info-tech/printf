@@ -17,6 +17,11 @@ int _printf(const char *format, ...)
 	char *str;
 	va_list args;
 
+	if (format == NULL)
+	{
+		return (-1);
+	}
+
 	va_start(args, format);
 
 	for (i = 0; format && format[i] != '\0'; i++)
@@ -59,6 +64,10 @@ int _printf(const char *format, ...)
 				case 's':
 					{
 						str = va_arg(args, char*);
+						if (str == NULL)
+						{
+							str = "(null)";
+						}
 						while (*str != '\0')
 						{
 							buffer[buff_ind++] = *str;
