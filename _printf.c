@@ -40,6 +40,11 @@ int _printf(const char *format, ...)
 			i++;
 			switch (format[i])
 			{
+				case '\0':
+					{
+						va_end(args);
+						return (-1);
+					}
 				case '%':
 					{
 						buffer[buff_ind++] = format[i];
@@ -53,12 +58,14 @@ int _printf(const char *format, ...)
 				case  'c':
 					{
 						ch = va_arg(args, int);
+						if (ch == 0)
+							ch = '\0';
 						buffer[buff_ind++] = ch;
 						if (buff_ind == BUFF_SIZE)
 						{
 							print_buffer(buffer, &buff_ind);
 						}
-						printed_chars++;
+						printed_chars++;	
 						break;
 					}
 				case 's':
