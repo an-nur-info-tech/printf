@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <stdbool.h>
 
+#define BUFF_SIZE 1024
+
 int _printf(const char *format, ...);
 
 #endif
