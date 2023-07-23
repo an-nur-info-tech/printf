@@ -25,7 +25,9 @@ int _printf(const char *format, ...)
 		{
 			buffer[buff_ind++] = format[i];
 			if (buff_ind == BUFF_SIZE)
+			{
 				print_buffer(buffer, &buff_ind);
+			}
 			printed_chars++;
 		}
 		else
@@ -35,11 +37,12 @@ int _printf(const char *format, ...)
 			{
 				case '%':
 					{
-						buffer[buff_ind++] = '%';
+						buffer[buff_ind++] = format[i];
 						if (buff_ind == BUFF_SIZE)
+						{
 							print_buffer(buffer, &buff_ind);
+						}
 						printed_chars++;
-						/*write(1, &format[i], 1);*/
 						break;
 					}
 				case  'c':
@@ -47,9 +50,9 @@ int _printf(const char *format, ...)
 						ch = va_arg(args, int);
 						buffer[buff_ind++] = ch;
 						if (buff_ind == BUFF_SIZE)
+						{
 							print_buffer(buffer, &buff_ind);
-						/*putchar(ch);
-						write(1, &ch, 1);*/
+						}
 						printed_chars++;
 						break;
 					}
@@ -60,10 +63,11 @@ int _printf(const char *format, ...)
 						{
 							buffer[buff_ind++] = *str;
 							if (buff_ind == BUFF_SIZE)
+							{
 								print_buffer(buffer, &buff_ind);
-							printed_chars++;
-							/*putchar(*str);*/
+							}
 							str++;
+							printed_chars++;
 						}
 						break;
 					}
