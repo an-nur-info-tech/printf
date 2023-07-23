@@ -76,7 +76,7 @@ int _printf(const char *format, ...)
 	}
 	print_buffer(buffer, &buff_ind);
 	va_end(args);
-	return (0);
+	return (printed_chars);
 }
 
 /**
