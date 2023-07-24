@@ -56,7 +56,7 @@ int _printf(const char *format, ...)
 						{
 							print_buffer(buffer, &buff_ind);
 						}
-						printed_chars++;	
+						printed_chars++;
 						break;
 					}
 				case 's':
@@ -77,22 +77,8 @@ int _printf(const char *format, ...)
 							printed_chars++;
 						}
 						break;
-					}/*
-				case 'd':
-					{
-							while (*str != '\0')
-						{
-							buffer[buff_ind++] = *str;
-							if (buff_ind == BUFF_SIZE)
-							{
-								print_buffer(buffer, &buff_ind);
-							}
-							str++;
-							printed_chars++;
-						}
-						break;
-					}*/
-					default:
+					}
+				default:
 					{
 						buffer[buff_ind++] = format[--i];
 						if (buff_ind == BUFF_SIZE)
