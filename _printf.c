@@ -84,6 +84,7 @@ int _printf(const char *format, ...)
 						break;
 					}
 				case 'd':
+				case 'i':
 					{
 						/*num = va_arg(args, int);*/
 						printed = _integer(args);
