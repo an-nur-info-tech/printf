@@ -1,5 +1,5 @@
 #include "main.h"
-
+int _integer(va_list list);
 void print_buffer(char buffer[], int *buff_ind);
 
 /**
@@ -11,7 +11,7 @@ void print_buffer(char buffer[], int *buff_ind);
 
 int _printf(const char *format, ...)
 {
-	int i, printed_chars = 0, buff_ind = 0;
+	int i, printed_chars = 0, printed = 0, buff_ind = 0;
 	char buffer[BUFF_SIZE];
 	int ch;
 	char *str;
@@ -35,9 +35,14 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
+			print_buffer(buffer, &buff_ind);
 			i++;
 			switch (format[i])
 			{
+				case '\0':
+					{
+						return (-1);
+					}
 				case '%':
 					{
 						buffer[buff_ind++] = format[i];
@@ -78,6 +83,15 @@ int _printf(const char *format, ...)
 						}
 						break;
 					}
+				case 'd':
+					{
+						/*num = va_arg(args, int);*/
+						printed = _integer(args);
+						if (printed == -1)
+							return (-1);
+						printed_chars += printed;
+						break;
+					}
 				default:
 					{
 						buffer[buff_ind++] = format[--i];
@@ -92,6 +106,41 @@ int _printf(const char *format, ...)
 	print_buffer(buffer, &buff_ind);
 	va_end(args);
 	return (printed_chars);
+}
+
+/**
+ * _integer - prints integer
+ * @list: va_list variable
+ * Return: prints given number of integers
+ */
+
+int _integer(va_list list)
+{
+long int num1 = va_arg(list, int), num2;
+	int div = 1, i = 0;
+
+	if (num1 < 0)
+	{
+		putchar('-');
+		i++;
+		num1 *= -1;
+	}
+	num2 = num1;
+	while (num2 > 9)
+	{
+		div *= 10;
+		num2 = num2 / 10;
+	}
+	while (div >= 1)
+	{
+		num2 = num1 % div;
+		num1 /= div;
+		putchar(num1 + '0');
+		num1 = num2;
+		div /= 10;
+		i++;
+	}
+	return (i);
 }
 
 /**
