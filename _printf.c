@@ -18,9 +18,7 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	if (format == NULL)
-	{
 		return (-1);
-	}
 
 	va_start(args, format);
 
@@ -40,12 +38,6 @@ int _printf(const char *format, ...)
 			i++;
 			switch (format[i])
 			{
-				case '\0':
-					{
-						va_end(args);
-						return (-1);
-						break;
-					}
 				case '%':
 					{
 						buffer[buff_ind++] = format[i];
@@ -85,10 +77,28 @@ int _printf(const char *format, ...)
 							printed_chars++;
 						}
 						break;
-					}
-				default:
+					}/*
+				case 'd':
 					{
-					break;
+							while (*str != '\0')
+						{
+							buffer[buff_ind++] = *str;
+							if (buff_ind == BUFF_SIZE)
+							{
+								print_buffer(buffer, &buff_ind);
+							}
+							str++;
+							printed_chars++;
+						}
+						break;
+					}*/
+					default:
+					{
+						buffer[buff_ind++] = format[--i];
+						if (buff_ind == BUFF_SIZE)
+							print_buffer(buffer, &buff_ind);
+						printed_chars++;
+						break;
 					}
 			}
 		}
